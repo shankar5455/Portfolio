@@ -10,7 +10,7 @@ const AdminDashboard = () => {
         <div className="header-content container">
           <h1 className="header-title">
             <span className="up">HI!</span>
-            <span className="down">I am P.G Shankar</span>
+            <span className="down">I am Admin</span>
           </h1>
           <p className="header-subtitle">FRONTEND WEB DESIGNER</p>
         </div>
