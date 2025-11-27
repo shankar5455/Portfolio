@@ -1,21 +1,22 @@
-# ===== Build stage =====
-FROM maven:3.9-eclipse-temurin-21 AS build
+# ====== BUILD STAGE ======
+FROM maven:3.9.9-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy pom.xml and download dependencies
+# copy pom + sources
 COPY pom.xml .
-RUN mvn dependency:go-offline
-
-# Copy source and build
 COPY src ./src
+
+# build jar
 RUN mvn clean package -DskipTests
 
-# ===== Run stage =====
-FROM eclipse-temurin:21-jre-alpine
+# ====== RUNTIME STAGE ======
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# Copy jar from build stage
+# copy the built jar from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-EXPOSE 8080
+# Spring Boot port
+EXPOSE 8082
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
