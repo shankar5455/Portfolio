@@ -59,7 +59,7 @@ const Navbar = () => {
             <li className="item"><span className="link" onClick={() => scrollToSection("home")}>Home</span></li>
             <li className="item"><span className="link" onClick={() => scrollToSection("skills")}>Skills</span></li>
             <li className="item"><span className="link" onClick={() => scrollToSection("projects")}>Projects</span></li>
-            <li className="item"><span className="link" onClick={() => scrollToSection("experience")}>Experience</span></li>
+            {/* <li className="item"><span className="link" onClick={() => scrollToSection("experience")}>Experience</span></li> */}
             <li className="item"><span className="link" onClick={() => scrollToSection("certificates")}>Certificate</span></li>
             <li className="item"><span className="link" onClick={() => scrollToSection("blogs")}>Blogs</span></li>
             <li className="item"><span className="link" onClick={() => scrollToSection("contact")}>Contact</span></li>

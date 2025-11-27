@@ -137,15 +137,19 @@ const SkillAdmin = () => {
                 />
               </div>
               <div className="admin-form-group">
-                <input
-                  type="text"
+                {/* Skill Level Dropdown */}
+                <select
                   name="level"
                   className="admin-form-control"
-                  placeholder="Level (Beginner / Intermediate / Expert)"
                   value={form.level}
                   onChange={handleChange}
                   required
-                />
+                >
+                  <option value="">Select Level</option>
+                  <option value="Beginner">Beginner</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Expert">Expert</option>
+                </select>
               </div>
             </div>
             
@@ -259,7 +263,6 @@ const SkillAdmin = () => {
           </div>
         </div>
       </div>
-
       <style jsx>{`
         .admin-container {
           max-width: 1200px;

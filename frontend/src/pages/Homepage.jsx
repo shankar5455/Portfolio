@@ -23,7 +23,7 @@ const Homepage = () => {
         <div className="header-content container">
           <h1 className="header-title">
             <span className="up">HI!</span>
-            <span className="down">I am User</span>
+            <span className="down">I am P.G Shankar</span>
           </h1>
           <p className="header-subtitle">FRONTEND WEB DESIGNER</p>
           <button 
@@ -46,9 +46,9 @@ const Homepage = () => {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="experience-section">
+      {/* <section id="experience" className="experience-section">
         <ExperienceSection />
-      </section>
+      </section> */}
 
       {/* Certificates Section */}
       <section id="certificates" className="certificates-section">
