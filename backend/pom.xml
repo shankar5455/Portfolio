@@ -16,7 +16,8 @@
     <groupId>com.portfolio</groupId>
     <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging> <!-- ✅ WAR packaging -->
+    <packaging>jar</packaging>
+
 
     <name>backend</name>
     <description>Personal Portfolio Website Backend with Spring Boot</description>
