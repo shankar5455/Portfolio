@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -14,42 +15,48 @@ import java.util.List;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Disable CSRF for Postman/React testing
-            .cors(withDefaults()) // ✅ Enable CORS support
+            .csrf(csrf -> csrf.disable())
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
-                // Public endpoints
+                // ---------- PUBLIC ENDPOINTS ----------
                 .requestMatchers("/api/admin/login", "/api/admin/create").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/skills/**", "/api/projects/**",
-                                 "/api/experiences/**", "/api/blogs/**", "/api/achievements/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/skills/**", "/api/projects/**",
-                        "/api/experiences/**", "/api/blogs/**", "/api/achievements/**").permitAll()
-                .requestMatchers(HttpMethod.PUT, "/api/skills/**", "/api/projects/**",
-                        "/api/experiences/**", "/api/blogs/**", "/api/achievements/**").permitAll()
-                .requestMatchers(HttpMethod.DELETE, "/api/skills/**", "/api/projects/**",
-                        "/api/experiences/**", "/api/blogs/**", "/api/achievements/**").permitAll()
+                .requestMatchers(
+                        HttpMethod.GET,
+                        "/api/skills/**",
+                        "/api/projects/**",
+                        "/api/experiences/**",
+                        "/api/blogs/**",
+                        "/api/achievements/**"
+                ).permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/contact").permitAll()
 
-                // All other requests require authentication
+                // ---------- EVERYTHING ELSE ----------
                 .anyRequest().authenticated()
             )
-            .httpBasic(withDefaults()); // Basic Auth
+            .httpBasic(withDefaults());   // keep simple Basic auth for now
 
         return http.build();
     }
 
-    // ✅ Global CORS config
+    // Global CORS config
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(
-                "http://localhost:3000", // React (CRA)
-                "http://localhost:5173"  // React (Vite) if you use it
+
+        // Origins allowed to call backend (add your domain here later if you host it)
+        configuration.setAllowedOriginPatterns(List.of(
+                "http://localhost:3000",   // React dev CRA
+                "http://localhost:5173",   // React dev Vite
+                "http://localhost:30080",  // Frontend via Kubernetes NodePort
+                "http://127.0.0.1:30080"
         ));
+
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
