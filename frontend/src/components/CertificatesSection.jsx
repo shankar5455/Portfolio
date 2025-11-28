@@ -9,7 +9,7 @@ const CertificatesSection = ({ id = "certificates" }) => {
   useEffect(() => {
     const fetchCertificates = async () => {
       try {
-        const res = await fetch("http://localhost:8082/api/achievements");
+        const res = await fetch("http://localhost:30025/api/achievements");
         const data = await res.json();
         setCertificates(data);
       } catch (err) {

@@ -25,7 +25,7 @@ const BlogAdmin = () => {
   // Fetch blogs
   const fetchBlogs = async () => {
     try {
-      const res = await axios.get("http://localhost:8082/api/blogs");
+      const res = await axios.get("http://localhost:30025/api/blogs");
       setBlogs(res.data);
     } catch (err) {
       console.error(err);
@@ -93,10 +93,10 @@ const BlogAdmin = () => {
       };
 
       if (editingId) {
-        await axios.put(`http://localhost:8082/api/blogs/${editingId}`, payload);
+        await axios.put(`http://localhost:30025/api/blogs/${editingId}`, payload);
         setMessage("✅ Blog updated successfully!");
       } else {
-        await axios.post("http://localhost:8082/api/blogs", payload);
+        await axios.post("http://localhost:30025/api/blogs", payload);
         setMessage("✅ Blog added successfully!");
       }
 
@@ -145,7 +145,7 @@ const BlogAdmin = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this blog?")) {
       try {
-        await axios.delete(`http://localhost:8082/api/blogs/${id}`);
+        await axios.delete(`http://localhost:30025/api/blogs/${id}`);
         setMessage("🗑️ Blog deleted successfully!");
         fetchBlogs();
       } catch (err) {

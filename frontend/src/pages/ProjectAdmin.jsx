@@ -20,7 +20,7 @@ const ProjectAdmin = () => {
   // Fetch projects
   const fetchProjects = async () => {
     try {
-      const res = await axios.get("http://localhost:8082/api/projects");
+      const res = await axios.get("http://localhost:30025/api/projects");
       setProjects(res.data);
     } catch (err) {
       console.error(err);
@@ -73,10 +73,10 @@ const ProjectAdmin = () => {
       const payload = { ...form, imageUrl };
 
       if (editingId) {
-        await axios.put(`http://localhost:8082/api/projects/${editingId}`, payload);
+        await axios.put(`http://localhost:30025/api/projects/${editingId}`, payload);
         setMessage("✅ Project updated successfully!");
       } else {
-        await axios.post("http://localhost:8082/api/projects", payload);
+        await axios.post("http://localhost:30025/api/projects", payload);
         setMessage("✅ Project added successfully!");
       }
 
@@ -116,7 +116,7 @@ const ProjectAdmin = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this project?")) {
       try {
-        await axios.delete(`http://localhost:8082/api/projects/${id}`);
+        await axios.delete(`http://localhost:30025/api/projects/${id}`);
         setMessage("🗑️ Project deleted successfully!");
         fetchProjects();
       } catch (err) {

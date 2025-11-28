@@ -18,7 +18,7 @@ const ExperienceAdmin = () => {
   // Fetch experiences
   const fetchExperiences = async () => {
     try {
-      const res = await axios.get("http://localhost:8082/api/experiences");
+      const res = await axios.get("http://localhost:30025/api/experiences");
       setExperiences(res.data);
     } catch (err) {
       console.error(err);
@@ -44,10 +44,10 @@ const ExperienceAdmin = () => {
 
     try {
       if (editingId) {
-        await axios.put(`http://localhost:8082/api/experiences/${editingId}`, form);
+        await axios.put(`http://localhost:30025/api/experiences/${editingId}`, form);
         setMessage("✅ Experience updated successfully!");
       } else {
-        await axios.post("http://localhost:8082/api/experiences", form);
+        await axios.post("http://localhost:30025/api/experiences", form);
         setMessage("✅ Experience added successfully!");
       }
       setForm({ companyName: "", role: "", startDate: "", endDate: "", description: "" });
@@ -75,7 +75,7 @@ const ExperienceAdmin = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this experience?")) {
       try {
-        await axios.delete(`http://localhost:8082/api/experiences/${id}`);
+        await axios.delete(`http://localhost:30025/api/experiences/${id}`);
         setMessage("🗑️ Experience deleted successfully!");
         fetchExperiences();
       } catch (err) {

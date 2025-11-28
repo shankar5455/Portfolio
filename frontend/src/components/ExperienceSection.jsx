@@ -9,7 +9,7 @@ const ExperienceSection = ({ id = "experience" }) => {
   useEffect(() => {
     const fetchExperiences = async () => {
       try {
-        const res = await fetch("http://localhost:8082/api/experiences");
+        const res = await fetch("http://localhost:30025/api/experiences");
         const data = await res.json();
         setExperiences(data);
       } catch (err) {

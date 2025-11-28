@@ -9,7 +9,7 @@ const ProjectSection = ({ id = "projects" }) => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch("http://localhost:8082/api/projects");
+        const res = await fetch("http://localhost:30025/api/projects");
         const data = await res.json();
         setProjects(data);
       } catch (err) {

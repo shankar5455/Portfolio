@@ -19,7 +19,7 @@ const CertificateAdmin = () => {
   // Fetch certificates
   const fetchCertificates = async () => {
     try {
-      const res = await axios.get("http://localhost:8082/api/achievements");
+      const res = await axios.get("http://localhost:30025/api/achievements");
       setCertificates(res.data);
     } catch (err) {
       console.error(err);
@@ -74,10 +74,10 @@ const CertificateAdmin = () => {
       const payload = { ...form, certificatePhotoUrl };
 
       if (editingId) {
-        await axios.put(`http://localhost:8082/api/achievements/${editingId}`, payload);
+        await axios.put(`http://localhost:30025/api/achievements/${editingId}`, payload);
         setMessage("✅ Certificate updated successfully!");
       } else {
-        await axios.post("http://localhost:8082/api/achievements", payload);
+        await axios.post("http://localhost:30025/api/achievements", payload);
         setMessage("✅ Certificate added successfully!");
       }
 
@@ -109,7 +109,7 @@ const CertificateAdmin = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this certificate?")) {
       try {
-        await axios.delete(`http://localhost:8082/api/achievements/${id}`);
+        await axios.delete(`http://localhost:30025/api/achievements/${id}`);
         setMessage("🗑️ Certificate deleted successfully!");
         fetchCertificates();
       } catch (err) {

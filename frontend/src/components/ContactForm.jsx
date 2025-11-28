@@ -20,7 +20,7 @@ const ContactForm = ({ id = "contact" }) => {
     setStatus(null);
 
     try {
-      await axios.post("http://localhost:8082/api/contact", form);
+      await axios.post("http://localhost:30025/api/contact", form);
       setStatus({ type: "success", message: "✅ Message sent successfully!" });
       setForm({ name: "", email: "", message: "" }); // clear form
     } catch (err) {

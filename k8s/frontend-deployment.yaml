@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio-frontend
+  namespace: portfolio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portfolio-frontend
+  template:
+    metadata:
+      labels:
+        app: portfolio-frontend
+    spec:
+      containers:
+        - name: portfolio-frontend
+          image: pillyigshankar/portfolio-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80   # internal port your container listens on
+          env:
+            - name: VITE_API_BASE_URL
+              value: "http://portfolio-backend:8082"   # change if your code uses different name
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: portfolio-frontend
+  namespace: portfolio
+spec:
+  selector:
+    app: portfolio-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
+  type: NodePort

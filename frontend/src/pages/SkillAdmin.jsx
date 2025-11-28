@@ -14,7 +14,7 @@ const SkillAdmin = () => {
   // Fetch skills
   const fetchSkills = async () => {
     try {
-      const res = await axios.get("http://localhost:8082/api/skills");
+      const res = await axios.get("http://localhost:30025/api/skills");
       setSkills(res.data);
     } catch (err) {
       console.error(err);
@@ -69,10 +69,10 @@ const SkillAdmin = () => {
       const payload = { ...form, imageUrl };
 
       if (editingId) {
-        await axios.put(`http://localhost:8082/api/skills/${editingId}`, payload);
+        await axios.put(`http://localhost:30025/api/skills/${editingId}`, payload);
         setMessage("✅ Skill updated successfully!");
       } else {
-        await axios.post("http://localhost:8082/api/skills", payload);
+        await axios.post("http://localhost:30025/api/skills", payload);
         setMessage("✅ Skill added successfully!");
       }
 
@@ -99,7 +99,7 @@ const SkillAdmin = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this skill?")) {
       try {
-        await axios.delete(`http://localhost:8082/api/skills/${id}`);
+        await axios.delete(`http://localhost:30025/api/skills/${id}`);
         setMessage("🗑️ Skill deleted successfully!");
         fetchSkills();
       } catch (err) {

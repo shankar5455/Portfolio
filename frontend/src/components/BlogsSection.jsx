@@ -8,7 +8,7 @@ const BlogsSection = ({ id = "blogs" }) => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch("http://localhost:8082/api/blogs");
+        const res = await fetch("http://localhost:30025/api/blogs");
         const data = await res.json();
         setBlogs(data.filter(blog => blog.status === "PUBLISHED")); // only published
       } catch (err) {
